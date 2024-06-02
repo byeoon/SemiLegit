@@ -400,7 +400,6 @@ public class Modules extends System<Modules> {
 
     private void initCombat() {
         add(new AnchorAura());
-        add(new AntiAnvil());
         add(new AntiBed());
         add(new ArrowDodge());
         add(new AutoAnvil());
@@ -414,18 +413,12 @@ public class Modules extends System<Modules> {
         add(new BedAura());
         add(new BowAimbot());
         add(new BowSpam());
-        add(new Burrow());
         add(new Criticals());
         add(new CrystalAura());
         add(new Hitboxes());
-        add(new HoleFiller());
         add(new KillAura());
         add(new Offhand());
         add(new Quiver());
-        add(new SelfAnvil());
-        add(new SelfTrap());
-        add(new SelfWeb());
-        add(new Surround());
     }
 
     private void initPlayer() {

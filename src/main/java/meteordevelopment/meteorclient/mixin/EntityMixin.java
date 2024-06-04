@@ -20,7 +20,6 @@ import meteordevelopment.meteorclient.systems.modules.render.ESP;
 import meteordevelopment.meteorclient.systems.modules.render.FreeLook;
 import meteordevelopment.meteorclient.systems.modules.render.Freecam;
 import meteordevelopment.meteorclient.systems.modules.render.NoRender;
-import meteordevelopment.meteorclient.systems.modules.world.HighwayBuilder;
 import meteordevelopment.meteorclient.utils.Utils;
 import meteordevelopment.meteorclient.utils.entity.fakeplayer.FakePlayerEntity;
 import meteordevelopment.meteorclient.utils.render.color.Color;
@@ -192,11 +191,6 @@ public abstract class EntityMixin {
 
         if (freecam.isActive()) {
             freecam.changeLookDirection(cursorDeltaX * 0.15, cursorDeltaY * 0.15);
-            ci.cancel();
-        }
-        else if (Modules.get().isActive(HighwayBuilder.class)) {
-            Camera camera = mc.gameRenderer.getCamera();
-            ((ICamera) camera).setRot(camera.getYaw() + cursorDeltaX * 0.15, camera.getPitch() + cursorDeltaY * 0.15);
             ci.cancel();
         }
         else if (freeLook.cameraMode()) {

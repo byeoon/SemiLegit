@@ -399,17 +399,10 @@ public class Modules extends System<Modules> {
     }
 
     private void initCombat() {
-        add(new AnchorAura());
-        add(new AntiBed());
-        add(new ArrowDodge());
-        add(new AutoAnvil());
         add(new AutoArmor());
         add(new AutoCity());
         add(new AutoEXP());
         add(new AutoTotem());
-        add(new AutoTrap());
-        add(new AutoWeapon());
-        add(new AutoWeb());
         add(new BedAura());
         add(new BowAimbot());
         add(new BowSpam());
@@ -417,16 +410,12 @@ public class Modules extends System<Modules> {
         add(new CrystalAura());
         add(new Hitboxes());
         add(new KillAura());
-        add(new Offhand());
-        add(new Quiver());
     }
 
     private void initPlayer() {
         add(new AntiHunger());
         add(new AutoEat());
-        add(new AutoFish());
         add(new AutoGap());
-        add(new AutoMend());
         add(new AutoReplenish());
         add(new AutoTool());
         add(new ChestSwap());
@@ -435,10 +424,8 @@ public class Modules extends System<Modules> {
         add(new FastUse());
         add(new GhostHand());
         add(new InstaMine());
-        add(new LiquidInteract());
         add(new MiddleClickExtra());
         add(new BreakDelay());
-        add(new NoInteract());
         add(new NoMiningTrace());
         add(new NoRotate());
         add(new OffhandCrash());
@@ -463,24 +450,19 @@ public class Modules extends System<Modules> {
         add(new ClickTP());
         add(new ElytraBoost());
         add(new ElytraFly());
-        add(new EntityControl());
         add(new EntitySpeed());
         add(new FastClimb());
         add(new Flight());
         add(new GUIMove());
-        add(new HighJump());
         add(new Jesus());
         add(new LongJump());
         add(new NoFall());
         add(new NoSlow());
-        add(new Parkour());
         add(new ReverseStep());
         add(new SafeWalk());
         add(new Scaffold());
-        add(new Slippy());
         add(new Sneak());
         add(new Speed());
-        add(new Spider());
         add(new Sprint());
         add(new Step());
         add(new TridentBoost());
@@ -502,7 +484,6 @@ public class Modules extends System<Modules> {
         add(new FreeLook());
         add(new Fullbright());
         add(new HandView());
-        add(new HoleESP());
         add(new ItemPhysics());
         add(new ItemHighlight());
         add(new LightOverlay());
@@ -514,7 +495,6 @@ public class Modules extends System<Modules> {
         add(new StorageESP());
         add(new TimeChanger());
         add(new Tracers());
-        add(new Trail());
         add(new Trajectories());
         add(new UnfocusedCPU());
         add(new VoidESP());
@@ -524,7 +504,6 @@ public class Modules extends System<Modules> {
         add(new Zoom());
         add(new Blur());
         add(new PopChams());
-        add(new TunnelESP());
         add(new BetterTab());
     }
 
@@ -534,15 +513,9 @@ public class Modules extends System<Modules> {
         add(new Collisions());
         add(new AutoBreed());
         add(new AutoBrewer());
-        add(new AutoMount());
-        add(new AutoNametag());
         add(new AutoShearer());
-        add(new AutoSign());
         add(new AutoSmelter());
         add(new BuildHeight());
-        add(new EChestFarmer());
-        add(new EndermanLook());
-        add(new Flamethrower());
         add(new LiquidFiller());
         add(new MountBypass());
         add(new NoGhostBlocks());
@@ -550,8 +523,6 @@ public class Modules extends System<Modules> {
         add(new StashFinder());
         add(new SpawnProofer());
         add(new Timer());
-        add(new VeinMiner());
-        add(new HighwayBuilder());
 
         if (BaritoneUtils.IS_AVAILABLE) {
             add(new Excavator());
@@ -560,17 +531,14 @@ public class Modules extends System<Modules> {
     }
 
     private void initMisc() {
-        add(new Swarm());
+      //  add(new Swarm());
         add(new AntiPacketKick());
         add(new AutoClicker());
-        add(new AutoLog());
         add(new AutoReconnect());
         add(new AutoRespawn());
         add(new BetterBeacons());
         add(new BetterChat());
-        add(new BookBot());
         add(new DiscordPresence());
-        add(new MessageAura());
         add(new NameProtect());
         add(new Notebot());
         add(new Notifier());

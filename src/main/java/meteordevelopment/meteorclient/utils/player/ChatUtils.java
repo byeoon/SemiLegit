@@ -38,7 +38,7 @@ public class ChatUtils {
         PREFIX = Text.empty()
             .setStyle(Style.EMPTY.withFormatting(Formatting.GRAY))
             .append("[")
-            .append(Text.literal("Meteor").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(MeteorClient.ADDON.color.getPacked()))))
+            .append(Text.literal("SemiLegit").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(MeteorClient.ADDON.color.getPacked()))))
             .append("] ");
     }
 
@@ -90,7 +90,7 @@ public class ChatUtils {
     }
 
     public static void infoPrefix(String prefix, String message, Object... args) {
-        sendMsg(0, prefix, Formatting.LIGHT_PURPLE, Formatting.GRAY, message, args);
+        sendMsg(0, prefix, Formatting.DARK_BLUE, Formatting.GRAY, message, args);
     }
 
     // Warning
@@ -100,7 +100,7 @@ public class ChatUtils {
     }
 
     public static void warningPrefix(String prefix, String message, Object... args) {
-        sendMsg(0, prefix, Formatting.LIGHT_PURPLE, Formatting.YELLOW, message, args);
+        sendMsg(0, prefix, Formatting.DARK_BLUE, Formatting.YELLOW, message, args);
     }
 
     // Error
@@ -110,7 +110,7 @@ public class ChatUtils {
     }
 
     public static void errorPrefix(String prefix, String message, Object... args) {
-        sendMsg(0, prefix, Formatting.LIGHT_PURPLE, Formatting.RED, message, args);
+        sendMsg(0, prefix, Formatting.DARK_BLUE, Formatting.RED, message, args);
     }
 
     // Misc
@@ -120,7 +120,7 @@ public class ChatUtils {
     }
 
     public static void sendMsg(String prefix, Text message) {
-        sendMsg(0, prefix, Formatting.LIGHT_PURPLE, message);
+        sendMsg(0, prefix, Formatting.DARK_BLUE, message);
     }
 
     public static void sendMsg(Formatting color, String message, Object... args) {

@@ -6,6 +6,7 @@
 package meteordevelopment.meteorclient.systems.modules.combat;
 
 import meteordevelopment.meteorclient.events.packets.PacketEvent;
+import meteordevelopment.meteorclient.events.render.Render2DEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.pathing.PathManagers;
 import meteordevelopment.meteorclient.settings.*;
@@ -13,6 +14,7 @@ import meteordevelopment.meteorclient.systems.friends.Friends;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.systems.modules.Modules;
+import meteordevelopment.meteorclient.systems.modules.render.LogoutSpots;
 import meteordevelopment.meteorclient.utils.entity.EntityUtils;
 import meteordevelopment.meteorclient.utils.entity.SortPriority;
 import meteordevelopment.meteorclient.utils.entity.Target;
@@ -23,6 +25,7 @@ import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.meteorclient.utils.player.Rotations;
 import meteordevelopment.meteorclient.utils.world.TickRate;
 import meteordevelopment.orbit.EventHandler;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -40,7 +43,12 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameMode;
+import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -135,7 +143,7 @@ public class KillAura extends Module {
         .description("The maximum range the entity can be to attack it.")
         .defaultValue(4.5)
         .min(0)
-        .sliderMax(6)
+        .sliderMax(8)
         .build()
     );
 
@@ -213,6 +221,13 @@ public class KillAura extends Module {
         .build()
     );
 
+    private final Setting<Boolean> targetHUD = sgGeneral.add(new BoolSetting.Builder()
+        .name("TargetHUD")
+        .description("Shows a box of information on the target.")
+        .defaultValue(true)
+        .build()
+    );
+
     private final Setting<Integer> hitDelay = sgTiming.add(new IntSetting.Builder()
         .name("hit-delay")
         .description("How fast you hit the entity in ticks.")
@@ -238,7 +253,7 @@ public class KillAura extends Module {
     public boolean attacking;
 
     public KillAura() {
-        super(Categories.Combat, "kill-aura", "Attacks specified entities around you.");
+        super(Categories.Combat, "Killaura", "Attacks specified entities around you.");
     }
 
     @Override
@@ -385,6 +400,11 @@ public class KillAura extends Module {
         } else return mc.player.getAttackCooldownProgress(delay) >= 1;
     }
 
+    private void onRender2D(Render2DEvent event) {
+        if(targetHUD.get()) {
+        }
+    }
+
     private void attack(Entity target) {
         if (rotation.get() == RotationMode.OnHit) Rotations.rotate(Rotations.getYaw(target), Rotations.getPitch(target, Target.Body));
 
@@ -403,6 +423,56 @@ public class KillAura extends Module {
             case Both -> mc.player.getMainHandStack().getItem() instanceof AxeItem || mc.player.getMainHandStack().getItem() instanceof SwordItem;
             default -> true;
         };
+    }
+
+    public double getRoundedHealth(double number) {
+        BigDecimal bigDecimal = new BigDecimal(number);
+        bigDecimal = bigDecimal.setScale(1, RoundingMode.HALF_EVEN);
+        return bigDecimal.doubleValue();
+
+    }
+
+    public static final void drawSmoothRect(float left, float top, float right, float bottom, int color) {
+        GL11.glEnable(3042);
+        GL11.glEnable(2848);
+    //    Gui.drawRect(left, top, right, bottom, color);
+        GL11.glScalef(0.5f, 0.5f, 0.5f);
+    //    Gui.drawRect(left * 2.0f - 1.0f, top * 2.0f, left * 2.0f, bottom * 2.0f - 1.0f, color);
+     //   Gui.drawRect(left * 2.0f, top * 2.0f - 1.0f, right * 2.0f, top * 2.0f, color);
+    //    Gui.drawRect(right * 2.0f, top * 2.0f, right * 2.0f + 1.0f, bottom * 2.0f - 1.0f, color);
+     //   Gui.drawRect(left * 2.0f, bottom * 2.0f - 1.0f, right * 2.0f, bottom * 2.0f, color);
+        GL11.glDisable(3042);
+        GL11.glScalef(2.0f, 2.0f, 2.0f);
+    }
+
+    private int getHealthColorHEX(PlayerEntity e) {
+        int health = Math.round(20.0F * (e.getHealth() / e.getMaxHealth()));
+        int color = -1;
+        if (health >= 20) {
+            color = 5030935;
+        } else if (health >= 18) {
+            color = 9108247;
+        } else if (health >= 16) {
+            color = 10026904;
+        } else if (health >= 14) {
+            color = 12844472;
+        } else if (health >= 12) {
+            color = 16633879;
+        } else if (health >= 10) {
+            color = 15313687;
+        } else if (health >= 8) {
+            color = 16285719;
+        } else if (health >= 6) {
+            color = 16286040;
+        } else if (health >= 4) {
+            color = 15031100;
+        } else if (health >= 2) {
+            color = 16711680;
+        } else if (health >= 0) {
+            color = 16190746;
+        }
+
+        return color;
     }
 
     public Entity getTarget() {
@@ -440,4 +510,21 @@ public class KillAura extends Module {
         Adult,
         Both
     }
+
+    private int getAbsoluteX() {
+        return 410;
+    }
+
+    private int getAbsoluteY() {
+        return 300;
+    }
+
+    public int getHeight() {
+        return 52;
+    }
+
+    public int getWidth() {
+        return 154;
+    }
+
 }

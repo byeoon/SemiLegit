@@ -92,6 +92,7 @@ public class Modules extends System<Modules> {
         initRender();
         initWorld();
         initMisc();
+        initExploit();
     }
 
     @Override
@@ -403,7 +404,6 @@ public class Modules extends System<Modules> {
         add(new AutoCity());
         add(new AutoEXP());
         add(new AutoTotem());
-        add(new BedAura());
         add(new BowAimbot());
         add(new BowSpam());
         add(new Criticals());
@@ -425,10 +425,8 @@ public class Modules extends System<Modules> {
         add(new GhostHand());
         add(new InstaMine());
         add(new MiddleClickExtra());
-        add(new BreakDelay());
         add(new NoMiningTrace());
         add(new NoRotate());
-        add(new OffhandCrash());
         add(new PacketMine());
         add(new Portals());
         add(new PotionSaver());
@@ -441,10 +439,6 @@ public class Modules extends System<Modules> {
     private void initMovement() {
         add(new AirJump());
         add(new Anchor());
-        add(new AntiAFK());
-        add(new AntiVoid());
-        add(new AutoJump());
-        add(new AutoWalk());
         add(new Blink());
         add(new BoatFly());
         add(new ClickTP());
@@ -477,7 +471,6 @@ public class Modules extends System<Modules> {
         add(new BreakIndicators());
         add(new CameraTweaks());
         add(new Chams());
-        add(new CityESP());
         add(new EntityOwner());
         add(new ESP());
         add(new Freecam());
@@ -487,7 +480,6 @@ public class Modules extends System<Modules> {
         add(new ItemPhysics());
         add(new ItemHighlight());
         add(new LightOverlay());
-        add(new LogoutSpots());
         add(new Marker());
         add(new Nametags());
         add(new NoRender());
@@ -497,7 +489,6 @@ public class Modules extends System<Modules> {
         add(new Tracers());
         add(new Trajectories());
         add(new UnfocusedCPU());
-        add(new VoidESP());
         add(new WallHack());
         add(new WaypointsModule());
         add(new Xray());
@@ -514,9 +505,7 @@ public class Modules extends System<Modules> {
         add(new AutoBreed());
         add(new AutoBrewer());
         add(new AutoShearer());
-        add(new AutoSmelter());
         add(new BuildHeight());
-        add(new LiquidFiller());
         add(new MountBypass());
         add(new NoGhostBlocks());
         add(new Nuker());
@@ -525,7 +514,6 @@ public class Modules extends System<Modules> {
         add(new Timer());
 
         if (BaritoneUtils.IS_AVAILABLE) {
-            add(new Excavator());
             add(new InfinityMiner());
         }
     }
@@ -547,6 +535,10 @@ public class Modules extends System<Modules> {
         add(new Spam());
         add(new ServerSpoof());
         add(new InventoryTweaks());
+    }
+
+    private void initExploit() {
+        add(new OffhandCrash());
     }
 
     public static class ModuleRegistry extends SimpleRegistry<Module> {

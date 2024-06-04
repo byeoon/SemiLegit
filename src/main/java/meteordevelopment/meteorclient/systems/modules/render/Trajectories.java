@@ -88,7 +88,7 @@ public class Trajectories extends Module {
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("side-color")
         .description("The side color.")
-        .defaultValue(new SettingColor(255, 150, 0, 35))
+        .defaultValue(new SettingColor(0, 0, 0, 80))
         .build()
     );
 

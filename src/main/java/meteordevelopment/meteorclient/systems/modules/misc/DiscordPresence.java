@@ -103,7 +103,6 @@ public class DiscordPresence extends Module {
     );
 
     private static final RichPresence rpc = new RichPresence();
-    private SmallImage currentSmallImage;
     private int ticks;
     private boolean forceUpdate, lastWasInMainMenu;
 
@@ -121,7 +120,7 @@ public class DiscordPresence extends Module {
     }
 
     public DiscordPresence() {
-        super(Categories.Misc, "discord-presence", "Displays Meteor as your presence on Discord.");
+        super(Categories.Misc, "discord-presence", "Displays SemiLegit as your presence on Discord.");
         runInMainMenu = true;
     }
 
@@ -144,15 +143,13 @@ public class DiscordPresence extends Module {
 
     @Override
     public void onActivate() {
-        DiscordIPC.start(835240968533049424L, null);
+        DiscordIPC.start(1247633016784945223L, null);
 
         rpc.setStart(System.currentTimeMillis() / 1000L);
-
+        rpc.setLargeImage("bleeh", "Developed by byeoon");
+        rpc.setSmallImage("blush", "im so silly");
         String largeText = "%s %s".formatted("SemiLegit", MeteorClient.VERSION);
         if (!MeteorClient.DEV_BUILD.isEmpty()) largeText += " Dev Build: " + MeteorClient.DEV_BUILD;
-        rpc.setLargeImage("meteor_client", largeText);
-
-        currentSmallImage = SmallImage.Snail;
 
         recompileLine1();
         recompileLine2();
@@ -196,8 +193,6 @@ public class DiscordPresence extends Module {
 
         // Image
         if (ticks >= 200 || forceUpdate) {
-            currentSmallImage = currentSmallImage.next();
-            currentSmallImage.apply();
             update = true;
 
             ticks = 0;
@@ -294,8 +289,7 @@ public class DiscordPresence extends Module {
     }
 
     private enum SmallImage {
-        MineGame("minegame", "MineGame159"),
-        Snail("seasnail", "seasnail8169");
+        MineGame("bleeh", "Developed by byeoon");
 
         private final String key, text;
 
@@ -304,13 +298,5 @@ public class DiscordPresence extends Module {
             this.text = text;
         }
 
-        void apply() {
-            rpc.setSmallImage(key, text);
-        }
-
-        SmallImage next() {
-            if (this == MineGame) return Snail;
-            return MineGame;
-        }
     }
 }

@@ -31,7 +31,6 @@ public class Commands {
         add(new DamageCommand());
         add(new DropCommand());
         add(new EnchantCommand());
-        add(new FakePlayerCommand());
         add(new FriendsCommand());
         add(new CommandsCommand());
         add(new InventoryCommand());
@@ -44,7 +43,6 @@ public class Commands {
         add(new ResetCommand());
         add(new SayCommand());
         add(new ServerCommand());
-        add(new SwarmCommand());
         add(new ToggleCommand());
         add(new SettingCommand());
         add(new SpectateCommand());

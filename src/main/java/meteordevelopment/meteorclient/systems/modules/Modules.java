@@ -401,11 +401,7 @@ public class Modules extends System<Modules> {
 
     private void initCombat() {
         add(new AutoArmor());
-        add(new AutoCity());
-        add(new AutoEXP());
-        add(new AutoTotem());
         add(new BowAimbot());
-        add(new BowSpam());
         add(new Criticals());
         add(new CrystalAura());
         add(new Hitboxes());
@@ -414,37 +410,23 @@ public class Modules extends System<Modules> {
 
     private void initPlayer() {
         add(new AntiHunger());
-        add(new AutoEat());
-        add(new AutoGap());
-        add(new AutoReplenish());
-        add(new AutoTool());
         add(new ChestSwap());
-        add(new EXPThrower());
-        add(new FakePlayer());
         add(new FastUse());
         add(new GhostHand());
-        add(new InstaMine());
-        add(new MiddleClickExtra());
-        add(new NoMiningTrace());
-        add(new NoRotate());
         add(new PacketMine());
         add(new Portals());
-        add(new PotionSaver());
-        add(new PotionSpoof());
         add(new Reach());
         add(new Rotation());
         add(new SpeedMine());
+        add(new NoMiningTrace());
     }
 
     private void initMovement() {
-        add(new AirJump());
-        add(new Anchor());
-        add(new Blink());
+        add(new AirJump()); // todo merge
         add(new BoatFly());
         add(new ClickTP());
         add(new ElytraBoost());
         add(new ElytraFly());
-        add(new EntitySpeed());
         add(new FastClimb());
         add(new Flight());
         add(new GUIMove());
@@ -452,7 +434,6 @@ public class Modules extends System<Modules> {
         add(new LongJump());
         add(new NoFall());
         add(new NoSlow());
-        add(new ReverseStep());
         add(new SafeWalk());
         add(new Scaffold());
         add(new Sneak());
@@ -478,8 +459,6 @@ public class Modules extends System<Modules> {
         add(new Fullbright());
         add(new HandView());
         add(new ItemPhysics());
-        add(new ItemHighlight());
-        add(new LightOverlay());
         add(new Marker());
         add(new Nametags());
         add(new NoRender());
@@ -488,13 +467,11 @@ public class Modules extends System<Modules> {
         add(new TimeChanger());
         add(new Tracers());
         add(new Trajectories());
-        add(new UnfocusedCPU());
         add(new WallHack());
         add(new WaypointsModule());
         add(new Xray());
         add(new Zoom());
         add(new Blur());
-        add(new PopChams());
         add(new BetterTab());
     }
 
@@ -503,19 +480,8 @@ public class Modules extends System<Modules> {
         add(new Ambience());
         add(new Collisions());
         add(new AutoBreed());
-        add(new AutoBrewer());
-        add(new AutoShearer());
         add(new BuildHeight());
-        add(new MountBypass());
-        add(new NoGhostBlocks());
-        add(new Nuker());
-        add(new StashFinder());
-        add(new SpawnProofer());
         add(new Timer());
-
-        if (BaritoneUtils.IS_AVAILABLE) {
-            add(new InfinityMiner());
-        }
     }
 
     private void initMisc() {
@@ -530,7 +496,6 @@ public class Modules extends System<Modules> {
         add(new NameProtect());
         add(new Notebot());
         add(new Notifier());
-        add(new PacketCanceller());
         add(new SoundBlocker());
         add(new Spam());
         add(new ServerSpoof());
@@ -538,7 +503,7 @@ public class Modules extends System<Modules> {
     }
 
     private void initExploit() {
-        add(new OffhandCrash());
+
     }
 
     public static class ModuleRegistry extends SimpleRegistry<Module> {

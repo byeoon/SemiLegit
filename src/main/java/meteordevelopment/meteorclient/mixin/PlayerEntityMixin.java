@@ -84,9 +84,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     public void dontJump(CallbackInfo info) {
         if (!getWorld().isClient) return;
 
-        Anchor module = Modules.get().get(Anchor.class);
-        if (module.isActive() && module.cancelJump) info.cancel();
-        else if (Modules.get().get(Scaffold.class).towering()) info.cancel();
+        if (Modules.get().get(Scaffold.class).towering()) info.cancel();
     }
 
     @ModifyReturnValue(method = "getMovementSpeed", at = @At("RETURN"))

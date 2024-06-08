@@ -45,14 +45,14 @@ public abstract class WidgetScreen extends Screen {
     public Screen parent;
     private final WContainer root;
 
-    protected final GuiTheme theme;
+    public final GuiTheme theme;
 
     public boolean locked, lockedAllowClose;
     private boolean closed;
     private boolean onClose;
     private boolean debug;
 
-    private double lastMouseX, lastMouseY;
+    public double lastMouseX, lastMouseY;
 
     public double animProgress;
 

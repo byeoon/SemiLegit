@@ -44,7 +44,7 @@ public class HudEditorScreen extends WidgetScreen implements Snapper.Container {
     private final Snapper snapper;
     private Snapper.Element selectionSnapBox;
 
-    private int lastMouseX, lastMouseY;
+    public static int lastMouseX, lastMouseY;
 
     private boolean pressed;
     private int clickX, clickY;

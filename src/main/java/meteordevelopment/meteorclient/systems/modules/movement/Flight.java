@@ -5,6 +5,7 @@
 
 package meteordevelopment.meteorclient.systems.modules.movement;
 
+import meteordevelopment.meteorclient.events.meteor.KeyEvent;
 import meteordevelopment.meteorclient.events.packets.PacketEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.mixin.ClientPlayerEntityAccessor;
@@ -12,7 +13,11 @@ import meteordevelopment.meteorclient.mixin.PlayerMoveC2SPacketAccessor;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
+import meteordevelopment.meteorclient.systems.modules.Modules;
+import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.ElytraFlightModes;
+import meteordevelopment.meteorclient.systems.modules.render.Freecam;
 import meteordevelopment.meteorclient.utils.Utils;
+import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.entity.Entity;
@@ -39,6 +44,7 @@ public class Flight extends Module {
         .name("speed")
         .description("Your speed when flying.")
         .defaultValue(0.1)
+        .sliderMax(0.150)
         .min(0.0)
         .build()
     );
@@ -84,18 +90,30 @@ public class Flight extends Module {
         .build()
     );
 
+    private final Setting<Boolean> maintainLevel = sgGeneral.add(new BoolSetting.Builder()
+        .name("maintain-level")
+        .description("Maintains your current Y level when holding the jump key.")
+        .defaultValue(false)
+        .visible(() -> mode.get().name() == "AirJump")
+        .build()
+    );
+
     private int delayLeft = delay.get();
     private int offLeft = offTime.get();
     private boolean flip;
     private float lastYaw;
     private double lastPacketY = Double.MAX_VALUE;
 
+    private int level;
+
     public Flight() {
-        super(Categories.Movement, "flight", "FLYYYY! No Fall is recommended with this module.");
+        super(Categories.Movement, "flight", "FLYYYY! (NoFall is recommended with this module.)");
     }
 
     @Override
     public void onActivate() {
+        level = mc.player.getBlockPos().getY();
+
         if (mode.get() == Mode.Abilities && !mc.player.isSpectator()) {
             mc.player.getAbilities().flying = true;
             if (mc.player.getAbilities().creativeMode) return;
@@ -231,6 +249,35 @@ public class Flight extends Module {
         } else return lastY - currentY < 0.03130D;
     }
 
+    @EventHandler
+    private void onKey(KeyEvent event) {
+        if (mode.get().name() == "AirJump") {
+
+        if (Modules.get().isActive(Freecam.class) || mc.currentScreen != null || mc.player.isOnGround()) return;
+
+        if (event.action != KeyAction.Press) return;
+
+        if (mc.options.jumpKey.matchesKey(event.key, 0)) {
+            level = mc.player.getBlockPos().getY();
+            mc.player.jump();
+        }
+        else if (mc.options.sneakKey.matchesKey(event.key, 0)) {
+            level--;
+        }
+        }
+    }
+
+    @EventHandler
+    private void onTick(TickEvent.Pre event) {
+        if (mode.get().name() == "AirJump") {
+            if (Modules.get().isActive(Freecam.class) || mc.player.isOnGround()) return;
+
+            if (maintainLevel.get() && mc.player.getBlockPos().getY() == level && mc.options.jumpKey.isPressed()) {
+                mc.player.jump();
+            }
+        }
+    }
+
     private void abilitiesOff() {
         mc.player.getAbilities().flying = false;
         mc.player.getAbilities().setFlySpeed(0.05f);
@@ -256,7 +303,8 @@ public class Flight extends Module {
 
     public enum Mode {
         Abilities,
-        Velocity
+        Velocity,
+        AirJump
     }
 
     public enum AntiKickMode {

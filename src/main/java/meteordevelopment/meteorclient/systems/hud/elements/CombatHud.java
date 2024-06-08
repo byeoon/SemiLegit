@@ -43,6 +43,7 @@ import java.util.Map;
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 // TODO: Rewrite this to use the hud renderer system
+// AKA TargetHUD
 public class CombatHud extends HudElement {
     private static final Color GREEN = new Color(15, 255, 15);
     private static final Color RED = new Color(255, 15, 15);
@@ -103,30 +104,6 @@ public class CombatHud extends HudElement {
         .name("enchantment-color")
         .description("Color of enchantment text.")
         .defaultValue(new SettingColor(255, 255, 255))
-        .build()
-    );
-
-    private final Setting<SettingColor> pingColor1 = sgGeneral.add(new ColorSetting.Builder()
-        .name("ping-stage-1")
-        .description("Color of ping text when under 75.")
-        .defaultValue(new SettingColor(15, 255, 15))
-        .visible(displayPing::get)
-        .build()
-    );
-
-    private final Setting<SettingColor> pingColor2 = sgGeneral.add(new ColorSetting.Builder()
-        .name("ping-stage-2")
-        .description("Color of ping text when between 75 and 200.")
-        .defaultValue(new SettingColor(255, 150, 15))
-        .visible(displayPing::get)
-        .build()
-    );
-
-    private final Setting<SettingColor> pingColor3 = sgGeneral.add(new ColorSetting.Builder()
-        .name("ping-stage-3")
-        .description("Color of ping text when over 200.")
-        .defaultValue(new SettingColor(255, 15, 15))
-        .visible(displayPing::get)
         .build()
     );
 
@@ -246,9 +223,9 @@ public class CombatHud extends HudElement {
             String pingText = ping + "ms";
 
             Color pingColor;
-            if (ping <= 75) pingColor = pingColor1.get();
-            else if (ping <= 200) pingColor = pingColor2.get();
-            else pingColor = pingColor3.get();
+            if (ping <= 75) pingColor = Color.GREEN;
+            else if (ping <= 200) pingColor = Color.YELLOW;
+            else pingColor = Color.RED;
 
             // Distance
             double dist = 0;

@@ -37,9 +37,8 @@ public class ChatUtils {
     public static void init() {
         PREFIX = Text.empty()
             .setStyle(Style.EMPTY.withFormatting(Formatting.GRAY))
-            .append("[")
-            .append(Text.literal("SemiLegit").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(MeteorClient.ADDON.color.getPacked()))))
-            .append("] ");
+            .append(Text.literal(Formatting.BLUE + "SemiLegit").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(MeteorClient.ADDON.color.getPacked()))))
+            .append(" » ");
     }
 
     public static Text getMeteorPrefix() {

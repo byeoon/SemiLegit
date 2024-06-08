@@ -24,7 +24,7 @@ public class GuiThemes {
     private static final File FILE = new File(FOLDER, "gui.nbt");
 
     private static final List<GuiTheme> themes = new ArrayList<>();
-    private static GuiTheme theme;
+    public static GuiTheme theme;
 
     private GuiThemes() {
     }

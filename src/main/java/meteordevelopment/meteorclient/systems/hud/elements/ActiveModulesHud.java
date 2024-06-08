@@ -65,6 +65,13 @@ public class ActiveModulesHud extends HudElement {
         .build()
     );
 
+    private final Setting<Boolean> astolfoColor = sgGeneral.add(new BoolSetting.Builder()
+        .name("Astolfo Colors")
+        .description("Renders shadow behind text.")
+        .defaultValue(true)
+        .build()
+    );
+
     private final Setting<Boolean> shadow = sgGeneral.add(new BoolSetting.Builder()
         .name("shadow")
         .description("Renders shadow behind text.")
@@ -114,46 +121,46 @@ public class ActiveModulesHud extends HudElement {
     );
 
     private final Setting<Double> rainbowSpeed = sgGeneral.add(new DoubleSetting.Builder()
-        .name("rainbow-speed")
+        .name("Color Speed")
         .description("Rainbow speed of rainbow color mode.")
         .defaultValue(0.05)
         .sliderMin(0.01)
         .sliderMax(0.2)
         .decimalPlaces(4)
-        .visible(() -> colorMode.get() == ColorMode.Rainbow)
+        .visible(() -> colorMode.get() == ColorMode.Rainbow || colorMode.get() == ColorMode.Astolfo)
         .build()
     );
 
     private final Setting<Double> rainbowSpread = sgGeneral.add(new DoubleSetting.Builder()
-        .name("rainbow-spread")
+        .name("Color Spread")
         .description("Rainbow spread of rainbow color mode.")
         .defaultValue(0.01)
         .sliderMin(0.001)
         .sliderMax(0.05)
         .decimalPlaces(4)
-        .visible(() -> colorMode.get() == ColorMode.Rainbow)
+        .visible(() -> colorMode.get() == ColorMode.Rainbow || colorMode.get() == ColorMode.Astolfo)
         .build()
     );
 
     private final Setting<Double> rainbowSaturation = sgGeneral.add(new DoubleSetting.Builder()
-        .name("rainbow-saturation")
+        .name("Color Saturation")
         .defaultValue(1.0d)
         .sliderRange(0.0d, 1.0d)
-        .visible(() -> colorMode.get() == ColorMode.Rainbow)
+        .visible(() -> colorMode.get() == ColorMode.Rainbow || colorMode.get() == ColorMode.Astolfo)
         .build()
     );
 
     private final Setting<Double> rainbowBrightness = sgGeneral.add(new DoubleSetting.Builder()
-        .name("rainbow-brightness")
+        .name("Color Brightness")
         .defaultValue(1.0d)
         .sliderRange(0.0d, 1.0d)
-        .visible(() -> colorMode.get() == ColorMode.Rainbow)
+        .visible(() -> colorMode.get() == ColorMode.Rainbow || colorMode.get() == ColorMode.Astolfo)
         .build()
     );
 
     private final List<Module> modules = new ArrayList<>();
 
-    private final Color rainbow = new Color(255, 255, 255);
+    private final Color rainbow = astolfoColors(2, 0.8F, 0.5F);
     private double rainbowHue1;
     private double rainbowHue2;
 
@@ -243,6 +250,14 @@ public class ActiveModulesHud extends HudElement {
                 rainbow.b = Color.toRGBAB(c);
                 color = rainbow;
             }
+            case Astolfo -> {
+                rainbowHue2 += rainbowSpread.get();
+                int c = java.awt.Color.HSBtoRGB((float) rainbowHue2, 0.8F, 0.7F);
+                rainbow.r = Color.toRGBAR(c);
+                rainbow.g = Color.toRGBAG(c);
+                rainbow.b = Color.toRGBAB(c);
+                color = astolfoColors(rainbowSpread.get(), 0.8F, 0.7F);
+            }
         }
 
         renderer.text(module.title, x, y, color, shadow.get(), getScale());
@@ -320,6 +335,27 @@ public class ActiveModulesHud extends HudElement {
     public enum ColorMode {
         Flat,
         Random,
-        Rainbow
+        Rainbow,
+        Astolfo
     }
-}
+    public static Color astolfoColors(double var2, float bright, float st) {
+        double v1 = Math.ceil(System.currentTimeMillis() + (long) (var2 * 109)) / 5;
+        float hue = (float) ((v1 % 360.0) / 360.0);
+
+        int[] color1 = {173, 216, 230};
+        int[] color2 = {0, 0, 139};
+
+        float ratio = hue;
+        int red = (int) (color1[0] + ratio * (color2[0] - color1[0]));
+        int green = (int) (color1[1] + ratio * (color2[1] - color1[1]));
+        int blue = (int) (color1[2] + ratio * (color2[2] - color1[2]));
+
+        red = Math.min(255, Math.max(0, red));
+        green = Math.min(255, Math.max(0, green));
+        blue = Math.min(255, Math.max(0, blue));
+
+        Color interpolatedColor = new Color(red, green, blue);
+
+        return interpolatedColor;
+    }
+    }

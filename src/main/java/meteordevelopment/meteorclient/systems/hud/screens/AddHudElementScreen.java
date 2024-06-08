@@ -27,13 +27,14 @@ import java.util.Map;
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class AddHudElementScreen extends WindowScreen {
+    // important cant forget
     private final int x, y;
     private final WTextBox searchBar;
 
     private Object firstObject;
 
     public AddHudElementScreen(GuiTheme theme, int x, int y) {
-        super(theme, "Add Hud element");
+        super(theme, "HUD Elements");
 
         this.x = x;
         this.y = y;

@@ -84,7 +84,7 @@ public class SpeedMine extends Module {
     );
 
     public SpeedMine() {
-        super(Categories.Player, "speed-mine", "Allows you to quickly mine blocks.");
+        super(Categories.Player, "FastMine", "Allows you to quickly mine blocks.");
     }
 
     @Override

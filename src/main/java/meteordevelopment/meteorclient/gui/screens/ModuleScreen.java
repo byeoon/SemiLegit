@@ -41,6 +41,8 @@ public class ModuleScreen extends WindowScreen {
         this.module = module;
     }
 
+    // this aint universal settings
+
     @Override
     public void initWidgets() {
         // Description

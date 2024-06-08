@@ -18,9 +18,10 @@ public class TridentBoost extends Module {
     private final Setting<Double> multiplier = sgGeneral.add(new DoubleSetting.Builder()
         .name("boost")
         .description("How much your velocity is multiplied by when using riptide.")
-        .defaultValue(2)
+        .defaultValue(1.2)
         .min(0.1)
         .sliderMin(1)
+        .sliderMax(2.5)
         .build()
     );
 
@@ -32,7 +33,7 @@ public class TridentBoost extends Module {
     );
 
     public TridentBoost() {
-        super(Categories.Movement, "trident-boost", "Boosts you when using riptide with a trident.");
+        super(Categories.Movement, "TridentBoost", "Boosts you when using riptide with a trident.");
     }
 
     public double getMultiplier() {

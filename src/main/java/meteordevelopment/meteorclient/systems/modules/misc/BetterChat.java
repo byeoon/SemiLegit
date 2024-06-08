@@ -59,8 +59,8 @@ public class BetterChat extends Module {
     );
 
     private final Setting<Boolean> fancy = sgGeneral.add(new BoolSetting.Builder()
-        .name("fancy-chat")
-        .description("Makes your messages ғᴀɴᴄʏ!")
+        .name("Freaky Chat")
+        .description("Makes your messages ғreakʏ!")
         .defaultValue(false)
         .build()
     );
@@ -179,8 +179,8 @@ public class BetterChat extends Module {
     );
 
     private final Setting<Boolean> prefixSmallCaps = sgPrefix.add(new BoolSetting.Builder()
-        .name("small-caps")
-        .description("Uses small caps in the prefix.")
+        .name("Freaky Prefix")
+        .description("Uses freaky text in the prefix.")
         .defaultValue(false)
         .visible(() -> !prefixRandom.get())
         .build()
@@ -230,8 +230,9 @@ public class BetterChat extends Module {
         super(Categories.Misc, "better-chat", "Improves your chat experience in various ways.");
 
         String[] a = "abcdefghijklmnopqrstuvwxyz".split("");
-        String[] b = "ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴩqʀꜱᴛᴜᴠᴡxyᴢ".split("");
+        String[] b = "𝒶𝒷𝒸𝒹𝑒𝒻𝑔𝒽𝒾𝒿𝓀𝓁𝓂𝓃𝑜𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏 ".split("");
         for (int i = 0; i < a.length; i++) SMALL_CAPS.put(a[i].charAt(0), b[i].charAt(0));
+
         compileFilterRegexList();
     }
 
@@ -362,7 +363,7 @@ public class BetterChat extends Module {
     }
 
     static {
-        registerCustomHead("[SemiLegit]", new MeteorIdentifier("textures/icons/chat/meteor.png"));
+        registerCustomHead("SemiLegit » ", new MeteorIdentifier("textures/icons/chat/semilegit.png"));
         registerCustomHead("[Baritone]", new MeteorIdentifier("textures/icons/chat/baritone.png"));
     }
 

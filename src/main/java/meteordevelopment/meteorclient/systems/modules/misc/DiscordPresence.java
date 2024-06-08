@@ -120,7 +120,7 @@ public class DiscordPresence extends Module {
     }
 
     public DiscordPresence() {
-        super(Categories.Misc, "discord-presence", "Displays SemiLegit as your presence on Discord.");
+        super(Categories.Misc, "DiscordRP", "Displays SemiLegit as your presence on Discord.");
         runInMainMenu = true;
     }
 

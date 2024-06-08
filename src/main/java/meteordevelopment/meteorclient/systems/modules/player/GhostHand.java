@@ -22,7 +22,7 @@ public class GhostHand extends Module {
     private final Set<BlockPos> posList = new ObjectOpenHashSet<>();
 
     public GhostHand() {
-        super(Categories.Player, "ghost-hand", "Opens containers through walls.");
+        super(Categories.Player, "GhostHand", "Polar's least favorite mod. (Allows you to open chests through walls)");
     }
 
     @EventHandler

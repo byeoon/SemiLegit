@@ -121,7 +121,6 @@ public class Hud extends System<Hud> implements Iterable<HudElement> {
         register(InventoryHud.INFO);
         register(CompassHud.INFO);
         register(ArmorHud.INFO);
-        register(HoleHud.INFO);
         register(PlayerModelHud.INFO);
         register(ActiveModulesHud.INFO);
         register(LagNotifierHud.INFO);
@@ -146,6 +145,8 @@ public class Hud extends System<Hud> implements Iterable<HudElement> {
             element.box.xAnchor = xAnchor;
             element.box.yAnchor = yAnchor;
         }
+
+
 
         element.settings.registerColorSettings(null);
 
@@ -190,6 +191,7 @@ public class Hud extends System<Hud> implements Iterable<HudElement> {
         int h = (int) Math.ceil(HudRenderer.INSTANCE.textHeight(true));
 
         // Top Left
+        // important stuff too
         add(MeteorTextHud.WATERMARK, 4, 4, XAnchor.Left, YAnchor.Top);
         add(MeteorTextHud.FPS, 4, 4 + h, XAnchor.Left, YAnchor.Top);
         add(MeteorTextHud.TPS, 4, 4 + h * 2, XAnchor.Left, YAnchor.Top);

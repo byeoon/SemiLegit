@@ -3,7 +3,7 @@
  * Copyright (c) Meteor Development.
  */
 
-package meteordevelopment.meteorclient.systems.modules.world;
+package meteordevelopment.meteorclient.systems.modules.player;
 
 import meteordevelopment.meteorclient.settings.DoubleSetting;
 import meteordevelopment.meteorclient.settings.Setting;
@@ -14,12 +14,14 @@ import meteordevelopment.meteorclient.systems.modules.Module;
 public class Timer extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
 
+    // BIG: mc.setScreen(new AddHudElementScreen(theme, lastMouseX, lastMouseY));
     private final Setting<Double> multiplier = sgGeneral.add(new DoubleSetting.Builder()
         .name("multiplier")
         .description("The timer multiplier amount.")
         .defaultValue(1)
         .min(0.1)
         .sliderMin(0.1)
+        .max(2.5)
         .build()
     );
 
@@ -27,7 +29,7 @@ public class Timer extends Module {
     private double override = 1;
 
     public Timer() {
-        super(Categories.World, "timer", "Changes the speed of everything in your game.");
+        super(Categories.Player, "timer", "Changes the speed of everything in your game.");
     }
 
     public double getMultiplier() {

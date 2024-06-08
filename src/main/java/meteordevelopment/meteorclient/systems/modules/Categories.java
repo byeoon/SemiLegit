@@ -16,7 +16,6 @@ public class Categories {
     public static final Category Render = new Category("render", Items.SPYGLASS.getDefaultStack());
     public static final Category World = new Category("world", Items.GRASS_BLOCK.getDefaultStack());
     public static final Category Misc = new Category("misc", Items.BLACK_BANNER.getDefaultStack());
-    public static final Category Exploit = new Category("exploit", Items.LAVA_BUCKET.getDefaultStack());
 
     public static boolean REGISTERING;
 
@@ -30,7 +29,6 @@ public class Categories {
         Modules.registerCategory(Render);
         Modules.registerCategory(World);
         Modules.registerCategory(Misc);
-        Modules.registerCategory(Exploit);
 
         // Addons
         AddonManager.ADDONS.forEach(MeteorAddon::onRegisterCategories);

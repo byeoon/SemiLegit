@@ -49,7 +49,7 @@ public abstract class MultiplayerScreenMixin extends Screen {
         loggedInAsLength = textRenderer.getWidth(loggedInAs);
 
         addDrawableChild(
-            new ButtonWidget.Builder(Text.literal("Accounts"), button -> client.setScreen(GuiThemes.get().accountsScreen()))
+            new ButtonWidget.Builder(Text.literal("Alt Manager"), button -> client.setScreen(GuiThemes.get().accountsScreen()))
                 .position(this.width - 75 - 3, 3)
                 .size(75, 20)
                 .build()

@@ -16,22 +16,19 @@ import meteordevelopment.meteorclient.events.meteor.ActiveModulesChangedEvent;
 import meteordevelopment.meteorclient.events.meteor.KeyEvent;
 import meteordevelopment.meteorclient.events.meteor.ModuleBindChangedEvent;
 import meteordevelopment.meteorclient.events.meteor.MouseButtonEvent;
-import meteordevelopment.meteorclient.pathing.BaritoneUtils;
 import meteordevelopment.meteorclient.settings.Setting;
 import meteordevelopment.meteorclient.settings.SettingGroup;
 import meteordevelopment.meteorclient.systems.System;
 import meteordevelopment.meteorclient.systems.Systems;
 import meteordevelopment.meteorclient.systems.modules.combat.*;
 import meteordevelopment.meteorclient.systems.modules.misc.*;
-import meteordevelopment.meteorclient.systems.modules.misc.swarm.Swarm;
 import meteordevelopment.meteorclient.systems.modules.movement.*;
 import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.ElytraFly;
 import meteordevelopment.meteorclient.systems.modules.movement.speed.Speed;
 import meteordevelopment.meteorclient.systems.modules.player.*;
 import meteordevelopment.meteorclient.systems.modules.render.*;
-import meteordevelopment.meteorclient.systems.modules.render.blockesp.BlockESP;
 import meteordevelopment.meteorclient.systems.modules.render.marker.Marker;
-import meteordevelopment.meteorclient.systems.modules.world.Timer;
+import meteordevelopment.meteorclient.systems.modules.player.Timer;
 import meteordevelopment.meteorclient.systems.modules.world.*;
 import meteordevelopment.meteorclient.utils.Utils;
 import meteordevelopment.meteorclient.utils.misc.Keybind;
@@ -419,10 +416,11 @@ public class Modules extends System<Modules> {
         add(new Rotation());
         add(new SpeedMine());
         add(new NoMiningTrace());
+        add(new Timer());
+        add(new Damage());
     }
 
     private void initMovement() {
-        add(new AirJump()); // todo merge
         add(new BoatFly());
         add(new ClickTP());
         add(new ElytraBoost());
@@ -462,7 +460,6 @@ public class Modules extends System<Modules> {
         add(new Marker());
         add(new Nametags());
         add(new NoRender());
-        add(new BlockESP());
         add(new StorageESP());
         add(new TimeChanger());
         add(new Tracers());
@@ -473,15 +470,14 @@ public class Modules extends System<Modules> {
         add(new Zoom());
         add(new Blur());
         add(new BetterTab());
+        add(new ShowModules());
     }
 
     private void initWorld() {
         add(new AirPlace());
         add(new Ambience());
         add(new Collisions());
-        add(new AutoBreed());
         add(new BuildHeight());
-        add(new Timer());
     }
 
     private void initMisc() {
@@ -497,7 +493,6 @@ public class Modules extends System<Modules> {
         add(new Notebot());
         add(new Notifier());
         add(new SoundBlocker());
-        add(new Spam());
         add(new ServerSpoof());
         add(new InventoryTweaks());
     }

@@ -14,7 +14,7 @@ import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.movement.speed.modes.Strafe;
 import meteordevelopment.meteorclient.systems.modules.movement.speed.modes.Vanilla;
-import meteordevelopment.meteorclient.systems.modules.world.Timer;
+import meteordevelopment.meteorclient.systems.modules.player.Timer;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.MovementType;
@@ -37,7 +37,7 @@ public class Speed extends Module {
         .description("The speed in blocks per second.")
         .defaultValue(5.6)
         .min(0)
-        .sliderMax(20)
+        .sliderMax(15)
         .visible(() -> speedMode.get() == SpeedModes.Vanilla)
         .build()
     );
@@ -48,7 +48,7 @@ public class Speed extends Module {
         .visible(() -> speedMode.get() == SpeedModes.Strafe)
         .defaultValue(1.6)
         .min(0)
-        .sliderMax(3)
+        .sliderMax(5)
         .build()
     );
 
@@ -65,8 +65,8 @@ public class Speed extends Module {
         .description("Timer override.")
         .defaultValue(1)
         .min(0.01)
-        .sliderMin(0.01)
-        .sliderMax(10)
+        .sliderMin(0.10)
+        .sliderMax(1.10)
         .build()
     );
 
@@ -95,7 +95,7 @@ public class Speed extends Module {
     private SpeedMode currentMode;
 
     public Speed() {
-        super(Categories.Movement, "speed", "Modifies your movement speed when moving on the ground.");
+        super(Categories.Movement, "Speed", "Modifies your movement speed when moving on the ground.");
 
         onSpeedModeChanged(speedMode.get());
     }
